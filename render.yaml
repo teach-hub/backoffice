@@ -10,10 +10,3 @@ services:
     startCommand: npx serve -s build
     numInstances: 1
     healthCheckPath: /
-
-databases:
-  - name: backoffice-db
-    region: ohio
-    plan: free
-    databaseName: main_db_backoffice
-    user: root
