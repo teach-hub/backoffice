@@ -1,16 +1,10 @@
-import React from 'react';
-import './App.css';
-import HomePage from './pages/index';
+import { Admin } from 'react-admin';
 
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Dashboard from './Dashboard';
+import authProvider from './auth/authProvider';
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <HomePage />
-  },
-]);
-
-const App = () => <RouterProvider router={router} />;
+const App = () => (
+    <Admin dashboard={Dashboard} authProvider={authProvider} />
+);
 
 export default App;
