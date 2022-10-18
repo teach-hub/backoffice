@@ -1,9 +1,8 @@
-import { Card, CardContent, CardHeader } from '@mui/material';
+import { Card, CardHeader } from '@mui/material';
 
 const Dashboard = () => (
     <Card>
-        <CardHeader title="Administración de TeachHub!" />
-        <CardContent>Lorem ipsum sic dolor amet...</CardContent>
+        <CardHeader title="Panel de administración de TeachHub!" />
     </Card>
 );
 
