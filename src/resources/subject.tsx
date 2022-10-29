@@ -13,13 +13,15 @@ const postFilters = [
     <ReferenceInput source="userId" label="Usuario" reference="users" />
 ];
 
-export const PostList = () => (
-    <List filters={postFilters}>
+export const SubjectsList = () => (
+    <List>
         <Datagrid>
-            <TextField source="id" />
-            <ReferenceField source="userId" reference="users" />
-            <TextField source="title" />
-            <EditButton />
+            {
+              // <TextField source="id" />
+              // <ReferenceField source="userId" reference="users" />
+            }
+            <TextField source="code" />
+            <TextField source="name" />
         </Datagrid>
     </List>
 );
