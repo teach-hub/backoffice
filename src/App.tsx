@@ -14,8 +14,13 @@ const App = () => {
 
     React.useEffect(() => {
         buildGraphQLProvider({ clientOptions: { uri: CORE_SERVICE_ADMIN_ENDPOINT } })
-            .then(graphQlDataProvider => setDataProvider(() => graphQlDataProvider));
+            .then(graphQlDataProvider => {
+              console.log('Setting data provider');
+              setDataProvider(() => graphQlDataProvider)
+            });
     }, []);
+
+    if (!dataProvider) return (<h1> Loading </h1>);
 
     return (
       <Admin dataProvider={dataProvider} dashboard={Dashboard} authProvider={authProvider}>
