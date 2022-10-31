@@ -10,6 +10,7 @@
     "@types/node": "^16.11.62",
     "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
+    "graphql": "^15.8.0",
     "prop-types": "^15.8.1",
     "ra-data-graphql": "^4.4.3",
     "ra-data-graphql-simple": "^4.4.3",
