@@ -6,14 +6,14 @@ import Dashboard from './Dashboard';
 import authProvider from './auth/authProvider';
 import { ListSubjects, CreateSubject } from './resources/subject';
 
-const CORE_SERVICE_ADMIN_ENDPOINT = 'http://localhost:4000/admin/graphql';
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000/admin/graphql';
 
 const App = () => {
 
     const [dataProvider, setDataProvider] = React.useState<any>(null);
 
     React.useEffect(() => {
-        buildGraphQLProvider({ clientOptions: { uri: CORE_SERVICE_ADMIN_ENDPOINT } })
+        buildGraphQLProvider({ clientOptions: { uri: BACKEND_URL } })
             .then(graphQlDataProvider => {
               console.log('Setting data provider');
               setDataProvider(() => graphQlDataProvider)
