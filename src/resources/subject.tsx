@@ -7,6 +7,7 @@ import {
   TextField,
   TextInput,
   EditButton,
+  Pagination
 } from 'react-admin';
 
 export const ListSubjects = () => (
