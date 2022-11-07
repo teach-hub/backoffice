@@ -12,21 +12,23 @@ import {
   ReferenceInput,
   ReferenceField,
   SelectInput,
+  BooleanField,
   Edit,
   required,
-  useUpdate
 } from 'react-admin';
 
 export const ListCourses = () => (
   <List>
     <Datagrid>
-      <TextField label="id" source="id" />
-      <TextField label="Nombre" source="name" />
-      <TextField label="Materia" source="name" />
+      <TextField label="ID" source="id" />
+      <TextField label="Nombre de catedra" source="name" />
+      <TextField label="Año" source="year" />
+      <TextField label="Cuatrimetre" source="period" />
+      <TextField label="Organizacion (GitHub)" source="organization" />
       <ReferenceField label="Materia" source="subjectId" reference="Subject">
         <TextField source="name" />
       </ReferenceField>
-      <TextField label="Año" source="year" />
+      <BooleanField label="Activa" source="active" />
       <EditButton />
     </Datagrid>
   </List>
@@ -35,13 +37,18 @@ export const ListCourses = () => (
 export const CreateCourse = () => (
   <Create title="Nueva catedra">
     <SimpleForm>
-      <TextInput label="Nombre" multiline source="name" />
-      <ReferenceInput label="Materia" reference="Subject" source="subjectId" validate={[required()]} >
-        <SelectInput optionText="name" validate={[required()]} />
+      <TextInput required label="Nombre" source="name" />
+      <ReferenceInput reference="Subject" source="subjectId">
+        <SelectInput required label="Materia" optionText="name" />
       </ReferenceInput>
       <TextInput label="Organizacion de GitHub" source="organization" />
-      <TextInput label="Cuatrimestre" source="period" />
-      <TextInput label="Año" source="year" />
+      <SelectInput
+        choices={[{ id: '1', name: '1'} , {id: '2', name: '2'}]}
+        label="Cuatrimestre"
+        source="period"
+        required
+      />
+      <TextInput label="Año" source="year" required />
     </SimpleForm>
   </Create>
 );
@@ -55,8 +62,8 @@ export const EditCourse = () => {
         <TextInput label="Organizacion (GitHub)" source="githubOrganization" />
         <TextInput label="Año" source="year" />
         <TextInput label="Cuatrimestre" source="period" />
-        <ReferenceInput label="Materia" reference="Subject" source="subjectId" validate={[required()]} >
-          <SelectInput optionText="name" validate={[required()]} />
+        <ReferenceInput reference="Subject" source="subjectId">
+          <SelectInput label="Materia" optionText="name" validate={[required()]} />
         </ReferenceInput>
         <BooleanInput label="Activa" source="active" />
       </SimpleForm>
