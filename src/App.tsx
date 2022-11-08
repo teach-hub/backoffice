@@ -4,7 +4,9 @@ import buildGraphQLProvider from 'ra-data-graphql-simple';
 
 import Dashboard from './Dashboard';
 import authProvider from './auth/authProvider';
+
 import { ListSubjects, CreateSubject, EditSubject } from './resources/subject';
+import { ListCourses, CreateCourse, EditCourse } from './resources/course';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000/admin/graphql';
 
@@ -25,6 +27,7 @@ const App = () => {
     return (
       <Admin dataProvider={dataProvider} dashboard={Dashboard} authProvider={authProvider}>
         <Resource options={{ label: "Materias" }} name="Subject" list={ListSubjects} create={CreateSubject} edit={EditSubject} />
+        <Resource options={{ label: "Catedras" }} name="Course" list={ListCourses} create={CreateCourse} edit={EditCourse} />
       </Admin>
     );
 };

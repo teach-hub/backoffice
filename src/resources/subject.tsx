@@ -7,13 +7,12 @@ import {
   TextField,
   TextInput,
   EditButton,
-  Pagination
 } from 'react-admin';
 
 export const ListSubjects = () => (
   <List>
     <Datagrid>
-      <TextField label="id" source="id" />
+      <TextField label="ID" source="id" />
       <TextField label="Codigo" source="code" />
       <TextField label="Nombre" source="name" />
       <EditButton />
@@ -24,8 +23,8 @@ export const ListSubjects = () => (
 export const CreateSubject = () => (
   <Create title="Nueva materia">
     <SimpleForm>
-      <TextInput label="Codigo" source="code" />
-      <TextInput label="Nombre" multiline source="name" />
+      <TextInput required label="Codigo" source="code" />
+      <TextInput required label="Nombre" source="name" />
     </SimpleForm>
   </Create>
 );
@@ -34,8 +33,8 @@ export const EditSubject = () => (
   <Edit>
     <SimpleForm>
       <TextInput disabled source="id" />
-      <TextInput source="code" />
-      <TextInput source="name" />
+      <TextInput required source="code" />
+      <TextInput required source="name" />
     </SimpleForm>
   </Edit>
 );
