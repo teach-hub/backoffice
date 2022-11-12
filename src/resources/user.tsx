@@ -27,15 +27,14 @@ export const ListUsers = () => (
   </List>
 );
 
-const UserFields = ({ useId }: { useId?: boolean }) => {
+const UserFields = () => {
   const emailValidation = email("Email invalido");
 
   return (
     <>
-      <TextInput disabled source="id" />
       <TextInput required label="Nombre" source="name" />
       <TextInput required label="Apellido" source="lastName" />
-      <TextInput required label="Padron" source="file" />
+      <TextInput label="Padron" source="file" />
       <TextInput required label="Github ID" source="githubId" />
       <TextInput required label="Email (notificaciones)" validate={emailValidation} source="notificationEmail" />
     </>
@@ -54,7 +53,8 @@ export const EditUser = () => {
   return (
     <Edit>
       <SimpleForm>
-        <UserFields useId />
+        <TextInput disabled source="id" />
+        <UserFields />
         <BooleanInput label="Activo" source="active" />
       </SimpleForm>
     </Edit>
