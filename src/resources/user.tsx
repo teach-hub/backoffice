@@ -9,6 +9,7 @@ import {
   BooleanInput,
   BooleanField,
   Edit,
+  email,
 } from 'react-admin';
 
 export const ListUsers = () => (
@@ -26,14 +27,25 @@ export const ListUsers = () => (
   </List>
 );
 
-export const CreateUser = () => (
-  <Create title="Nuevo usuario">
-    <SimpleForm>
+const UserFields = ({ useId }: { useId?: boolean }) => {
+  const emailValidation = email("Email invalido");
+
+  return (
+    <>
+      <TextInput disabled source="id" />
       <TextInput required label="Nombre" source="name" />
       <TextInput required label="Apellido" source="lastName" />
       <TextInput required label="Padron" source="file" />
       <TextInput required label="Github ID" source="githubId" />
-      <TextInput required label="Email (notificaciones)" source="notificationEmail" />
+      <TextInput required label="Email (notificaciones)" validate={emailValidation} source="notificationEmail" />
+    </>
+  );
+}
+
+export const CreateUser = () => (
+  <Create title="Nuevo usuario">
+    <SimpleForm>
+      <UserFields />
     </SimpleForm>
   </Create>
 );
@@ -42,12 +54,7 @@ export const EditUser = () => {
   return (
     <Edit>
       <SimpleForm>
-        <TextInput disabled source="id" />
-        <TextInput required label="Nombre" source="name" />
-        <TextInput required label="Apellido" source="lastName" />
-        <TextInput required label="Padron" source="file" />
-        <TextInput required label="Github ID" source="githubId" />
-        <TextInput required label="Email (notificaciones)" source="notificationEmail" />
+        <UserFields useId />
         <BooleanInput label="Activo" source="active" />
       </SimpleForm>
     </Edit>
