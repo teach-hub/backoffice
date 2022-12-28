@@ -1,17 +1,18 @@
 import {
+  BooleanInput,
+  CheckboxGroupInput,
   Create,
   Datagrid,
-  List,
   Edit,
-  SimpleForm,
-  useRecordContext,
-  TextField,
-  TextInput,
   EditButton,
+  List,
   ReferenceField,
   ReferenceInput,
   SelectInput,
-  BooleanInput
+  SimpleForm,
+  TextField,
+  TextInput,
+  useRecordContext,
 } from 'react-admin';
 
 /*
@@ -26,27 +27,34 @@ const ALL_PERMISSIONS = [
   { id: 'edit_subject', name: 'Editar materia' }
 ]
 
-export const ListRoles = () => (
-
-  <List>
-    <Datagrid>
-      <TextField label="ID" source="id" />
-      <TextField label="Nombre" source="name" />
-      <TextField label="Permisos" source="permissions" />
-      <ReferenceField label="Hereda de" source="parentRoleId" reference="Role">
-        <TextField source="name" />
-      </ReferenceField>
-      <EditButton />
-    </Datagrid>
-  </List>
-);
-
-export const CreateRole = () => {
-
+const PermissionsField = (_ :{ label: string }) => {
   const record = useRecordContext();
 
-  console.log(record);
+  if (!record) return null;
 
+  const permissionNames = record.permissions.map((p: string) =>
+    ALL_PERMISSIONS.find(x => x.id === p)?.name);
+
+  return (permissionNames.sort().join(', '))
+}
+
+export const ListRoles = () => {
+  return (
+    <List>
+      <Datagrid>
+        <TextField label="ID" source="id" />
+        <TextField label="Nombre" source="name" />
+        <PermissionsField label="Permisos" />
+        <ReferenceField label="Hereda de" source="parentRoleId" reference="Role">
+        <TextField source="name" />
+        </ReferenceField>
+        <EditButton />
+      </Datagrid>
+    </List>
+  );
+};
+
+export const CreateRole = () => {
   return (
     <Create title="Nuevo rol">
       <SimpleForm>
@@ -54,9 +62,7 @@ export const CreateRole = () => {
         <ReferenceInput reference="Role" source="parentRoleId">
           <SelectInput label="Hereda de" optionText="name" />
         </ReferenceInput>
-        <SelectInput
-          choices={ALL_PERMISSIONS} label="Permisos" source="permissions" required
-        />
+        <CheckboxGroupInput source="permissions" choices={ALL_PERMISSIONS} />
       </SimpleForm>
     </Create>
   )
@@ -66,14 +72,11 @@ export const EditRole = () => (
   <Edit>
     <SimpleForm>
       <TextInput disabled source="id" />
-      <TextInput required label="Permisos" source="permissions" />
       <TextInput required label="Nombre" source="name" />
       <ReferenceInput reference="Role" source="parentRoleId">
         <SelectInput label="Hereda de" optionText="name" />
       </ReferenceInput>
-      <SelectInput
-        choices={ALL_PERMISSIONS} label="Permisos" source="permissions" required
-      />
+      <CheckboxGroupInput source="permissions" choices={ALL_PERMISSIONS} />
       <BooleanInput label="Activo" source="active" />
     </SimpleForm>
   </Edit>
