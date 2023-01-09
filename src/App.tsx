@@ -9,6 +9,7 @@ import { ListCourses, CreateCourse, EditCourse } from './resources/course';
 import { ListUsers, CreateUser, EditUser } from './resources/user';
 import { ListRoles, CreateRole, EditRole } from './resources/role';
 import { CreateAdminUser, EditAdminUser, ListAdminUsers } from './resources/adminUser';
+import {CreateUserRole, EditUserRole, ListUserRoles} from "./resources/userRole";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000/admin/graphql';
 
@@ -33,6 +34,7 @@ const App = () => {
         <Resource options={{ label: "Materias" }} name="Subject" list={ListSubjects} create={CreateSubject} edit={EditSubject} />
         <Resource options={{ label: "Catedras" }} name="Course" list={ListCourses} create={CreateCourse} edit={EditCourse} />
         <Resource options={{ label: "Roles" }} name="Role" list={ListRoles} create={CreateRole} edit={EditRole} />
+        <Resource options={{ label: "Roles Usuarios" }} name="UserRole" list={ListUserRoles} create={CreateUserRole} edit={EditUserRole} />
       </Admin>
     );
 };
