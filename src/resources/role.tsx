@@ -14,6 +14,7 @@ import {
   TextInput,
   useRecordContext,
 } from 'react-admin';
+import {useState} from "react";
 
 /*
  * XXX: Lista de permisos disponibles, tiene que coincidir
@@ -55,12 +56,19 @@ export const ListRoles = () => {
 };
 
 export const CreateRole = () => {
+  const [parentRoleId, setParentRoleId] = useState(null);
+
   return (
-    <Create title="Nuevo rol">
+    <Create title="Nuevo rol" >
       <SimpleForm>
         <TextInput required label="Nombre" source="name" />
-        <ReferenceInput reference="Role" source="parentRoleId">
-          <SelectInput label="Hereda de" optionText="name" />
+        <ReferenceInput reference="Role" source="parentRoleId" >
+          <SelectInput
+            label="Hereda de"
+            optionText="name"
+            defaultValue={parentRoleId}
+            onChange={value => setParentRoleId(value)}
+          />
         </ReferenceInput>
         <CheckboxGroupInput source="permissions" choices={ALL_PERMISSIONS} />
       </SimpleForm>
@@ -68,16 +76,25 @@ export const CreateRole = () => {
   )
 };
 
-export const EditRole = () => (
-  <Edit>
-    <SimpleForm>
-      <TextInput disabled source="id" />
-      <TextInput required label="Nombre" source="name" />
-      <ReferenceInput reference="Role" source="parentRoleId">
-        <SelectInput label="Hereda de" optionText="name" />
-      </ReferenceInput>
-      <CheckboxGroupInput source="permissions" choices={ALL_PERMISSIONS} />
-      <BooleanInput label="Activo" source="active" />
-    </SimpleForm>
-  </Edit>
-);
+export const EditRole = () => {
+  const [parentRoleId, setParentRoleId] = useState(null);
+
+  return (
+    <Edit>
+      <SimpleForm>
+        <TextInput disabled source="id"/>
+        <TextInput required label="Nombre" source="name"/>
+        <ReferenceInput reference="Role" source="parentRoleId">
+          <SelectInput
+            label="Hereda de"
+            optionText="name"
+            defaultValue={parentRoleId}
+            onChange={value => setParentRoleId(value)}
+          />
+        </ReferenceInput>
+        <CheckboxGroupInput source="permissions" choices={ALL_PERMISSIONS}/>
+        <BooleanInput label="Activo" source="active"/>
+      </SimpleForm>
+    </Edit>
+  );
+}
