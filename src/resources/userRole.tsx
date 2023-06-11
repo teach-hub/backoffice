@@ -53,6 +53,7 @@ export const CreateUserRole = () => {
         <ReferenceInput reference="Role" source="roleId">
           <SelectInput label="Rol" optionText="name" />
         </ReferenceInput>
+        <BooleanInput label="Activo" source="active" />
       </SimpleForm>
     </Create>
   )

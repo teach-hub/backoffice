@@ -22,10 +22,13 @@ import {useState} from "react";
  */
 
 const ALL_PERMISSIONS = [
-  { id: 'view_home', name: 'Ver home' },
-  { id: 'view_user', name: 'Ver perfil de usuario' },
-  { id: 'edit_user', name: 'Editar usuario' },
-  { id: 'edit_subject', name: 'Editar materia' }
+  { id: 'viewHome', name: 'Ver home' },
+  { id: 'editSubject', name: 'Editar materia' },
+  { id: 'inviteUser', name: 'Invitar usuario' },
+  { id: 'createAssignment', name: 'Crear Trabajo Practico' },
+  { id: 'submitAssignment', name: 'Realizar entrega' },
+  { id: 'editAssignment', name: 'Editar entrega' },
+  { id: 'setOrganization', name: 'Cambiar organizacion de Github' },
 ]
 
 const PermissionsField = (_ :{ label: string }) => {
