@@ -1,4 +1,5 @@
 import {
+  BooleanField,
   BooleanInput,
   CheckboxGroupInput,
   Create,
@@ -29,6 +30,7 @@ const ALL_PERMISSIONS = [
   { id: 'submitAssignment', name: 'Realizar entrega' },
   { id: 'editAssignment', name: 'Editar entrega' },
   { id: 'setOrganization', name: 'Cambiar organizacion de Github' },
+  { id: 'createRepository', name: 'Crear repositorios' },
 ]
 
 const PermissionsField = (_ :{ label: string }) => {
@@ -49,6 +51,8 @@ export const ListRoles = () => {
         <TextField label="ID" source="id" />
         <TextField label="Nombre" source="name" />
         <PermissionsField label="Permisos" />
+        <BooleanField label="Rol de profesor" source="isTeacher" />
+        <BooleanField label="Activo" source="active" />
         <ReferenceField label="Hereda de" source="parentRoleId" reference="Role">
         <TextField source="name" />
         </ReferenceField>
@@ -74,6 +78,7 @@ export const CreateRole = () => {
           />
         </ReferenceInput>
         <CheckboxGroupInput source="permissions" choices={ALL_PERMISSIONS} />
+        <BooleanInput label="Rol de profesor" source="isTeacher"/>
       </SimpleForm>
     </Create>
   )
@@ -97,6 +102,7 @@ export const EditRole = () => {
         </ReferenceInput>
         <CheckboxGroupInput source="permissions" choices={ALL_PERMISSIONS}/>
         <BooleanInput label="Activo" source="active"/>
+        <BooleanInput label="Rol de profesor" source="isTeacher"/>
       </SimpleForm>
     </Edit>
   );
