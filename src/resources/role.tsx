@@ -27,6 +27,7 @@ const ALL_PERMISSIONS = [
   { id: 'editSubject', name: 'Editar materia' },
   { id: 'inviteUser', name: 'Invitar usuario' },
   { id: 'createAssignment', name: 'Crear Trabajo Practico' },
+  { id: 'manageOwnGroups', name: 'Gestionar mis grupos' },
   { id: 'submitAssignment', name: 'Realizar entrega' },
   { id: 'editAssignment', name: 'Editar entrega' },
   { id: 'setOrganization', name: 'Cambiar organizacion de Github' },
