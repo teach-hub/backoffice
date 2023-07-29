@@ -32,6 +32,7 @@ const ALL_PERMISSIONS = [
   { id: 'editAssignment', name: 'Editar entrega' },
   { id: 'setOrganization', name: 'Cambiar organizacion de Github' },
   { id: 'createRepository', name: 'Crear repositorios' },
+  { id: 'setReview', name: 'Realizar corrección' },
 ]
 
 const PermissionsField = (_ :{ label: string }) => {
