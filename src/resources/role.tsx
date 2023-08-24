@@ -33,6 +33,8 @@ const ALL_PERMISSIONS = [
   { id: 'setOrganization', name: 'Cambiar organizacion de Github' },
   { id: 'createRepository', name: 'Crear repositorios' },
   { id: 'setReview', name: 'Realizar corrección' },
+  { id: 'viewGroups', name: 'Ver grupos' },
+  { id: 'manageGroups', name: 'Gestionar grupos' },
 ]
 
 const PermissionsField = (_ :{ label: string }) => {
