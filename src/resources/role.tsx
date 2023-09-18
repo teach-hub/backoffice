@@ -35,6 +35,9 @@ const ALL_PERMISSIONS = [
   { id: 'setReview', name: 'Realizar corrección' },
   { id: 'viewGroups', name: 'Ver grupos' },
   { id: 'manageGroups', name: 'Gestionar grupos' },
+  { id: 'assign', name: 'Realizar corrección' },
+  { id: 'viewSubmission', name: 'Ver entregas' },
+  { id: 'assignReviewer', name: 'Asignar correctores' },
 ]
 
 const PermissionsField = (_ :{ label: string }) => {
