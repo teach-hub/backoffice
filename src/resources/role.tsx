@@ -37,6 +37,7 @@ const ALL_PERMISSIONS = [
   { id: 'manageGroups', name: 'Gestionar grupos' },
   { id: 'assign', name: 'Realizar corrección' },
   { id: 'viewSubmission', name: 'Ver entregas' },
+  { id: 'viewAllSubmissions', name: 'Ver entregas de cualquier corrector' },
   { id: 'assignReviewer', name: 'Asignar correctores' },
 ]
 
