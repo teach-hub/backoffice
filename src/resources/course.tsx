@@ -19,7 +19,7 @@ export const ListCourses = () => (
   <List>
     <Datagrid>
       <TextField label="ID" source="id" />
-      <TextField label="Nombre de catedra" source="name" />
+      <TextField label="Nombre de curso" source="name" />
       <TextField label="Año" source="year" />
       <TextField label="Cuatrimetre" source="period" />
       <TextField label="Organizacion (GitHub)" source="organization" />
@@ -33,7 +33,7 @@ export const ListCourses = () => (
 );
 
 export const CreateCourse = () => (
-  <Create title="Nueva catedra">
+  <Create title="Nueva curso">
     <SimpleForm>
       <TextInput required label="Nombre" source="name" />
       <ReferenceInput reference="Subject" source="subjectId">
