@@ -24,7 +24,7 @@ export const ListUserRoles = () => {
               `${user.lastName}, ${user.name} (${user.file})`
           } />
         </ReferenceField>
-        <ReferenceField label="Catedra" source="courseId" reference="Course">
+        <ReferenceField label="Curso" source="courseId" reference="Course">
           <TextField source="name" />
         </ReferenceField>
         <ReferenceField label="Rol" source="roleId" reference="Role">
@@ -48,7 +48,7 @@ export const CreateUserRole = () => {
           <SelectInput label="Usuario" optionText={userOptionRenderer} />
         </ReferenceInput>
         <ReferenceInput reference="Course" source="courseId">
-          <SelectInput label="Catedra" optionText="name" />
+          <SelectInput label="Curso" optionText="name" />
         </ReferenceInput>
         <ReferenceInput reference="Role" source="roleId">
           <SelectInput label="Rol" optionText="name" />
@@ -67,7 +67,7 @@ export const EditUserRole = () => (
         <SelectInput label="Usuario" optionText={userOptionRenderer} />
       </ReferenceInput>
       <ReferenceInput reference="Course" source="courseId">
-        <SelectInput label="Catedra" optionText="name" />
+        <SelectInput label="Curso" optionText="name" />
       </ReferenceInput>
       <ReferenceInput reference="Role" source="roleId">
         <SelectInput label="Rol" optionText="name" />

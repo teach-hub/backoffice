@@ -32,7 +32,7 @@ const App = () => {
         <Resource options={{ label: "Usuarios" }} name="User" list={ListUsers} create={CreateUser} edit={EditUser} />
         <Resource options={{ label: "Usuarios (Admin)" }} name="AdminUser" list={ListAdminUsers} create={CreateAdminUser} edit={EditAdminUser} />
         <Resource options={{ label: "Materias" }} name="Subject" list={ListSubjects} create={CreateSubject} edit={EditSubject} />
-        <Resource options={{ label: "Catedras" }} name="Course" list={ListCourses} create={CreateCourse} edit={EditCourse} />
+        <Resource options={{ label: "Cursos" }} name="Course" list={ListCourses} create={CreateCourse} edit={EditCourse} />
         <Resource options={{ label: "Roles" }} name="Role" list={ListRoles} create={CreateRole} edit={EditRole} />
         <Resource options={{ label: "Roles Usuarios" }} name="UserRole" list={ListUserRoles} create={CreateUserRole} edit={EditUserRole} />
       </Admin>
