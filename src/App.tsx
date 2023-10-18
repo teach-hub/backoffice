@@ -19,13 +19,10 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000/
 
 const App = () => {
 
-    console.log('Loading app.')
-
     const httpLink = new HttpLink({ uri: BACKEND_URL });
 
     const authMiddleware = new ApolloLink((operation, forward) => {
       operation.setContext(({ headers = {} }) => {
-        // add the authorization to the headers
         const username = localStorage.getItem('username');
         const password = localStorage.getItem('password');
 
@@ -39,7 +36,7 @@ const App = () => {
             }
           }
          } else
-           console.log('No auth found. Skipping.')
+           console.log('No auth found. Skipping sending headers.')
 
          return { headers }
       });
@@ -49,6 +46,7 @@ const App = () => {
 
     const client = new ApolloClient({
       cache: new InMemoryCache(),
+      uri: BACKEND_URL,
       link: concat(authMiddleware, httpLink)
     })
 

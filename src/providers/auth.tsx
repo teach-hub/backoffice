@@ -6,9 +6,6 @@ function buildAuthProvider(client: ApolloClient<NormalizedCacheObject>): AuthPro
 
   return {
     async login({ username, password }) {
-
-      console.log('Performing login...')
-
       const response = await client.mutate({
         mutation: gql`
           mutation LoginMutation($username: String!, $password: String!) {
@@ -23,14 +20,9 @@ function buildAuthProvider(client: ApolloClient<NormalizedCacheObject>): AuthPro
         }
       })
 
-      console.log(response)
-
       if (!response.data.login.success) {
-        console.log('Login failed.')
         return Promise.reject();
       }
-
-      console.log('Login succeeded, setting creds.')
 
       localStorage.setItem('username', username);
       localStorage.setItem('password', password);
@@ -38,15 +30,13 @@ function buildAuthProvider(client: ApolloClient<NormalizedCacheObject>): AuthPro
       return Promise.resolve();
     },
     async logout() {
-      console.log('Performing logout...')
+      console.log('Logging out')
 
       localStorage.clear();
 
       return Promise.resolve();
     },
     async checkError(errors: unknown | unknown[]) {
-      console.log('Checking error...');
-
       const isUnauthorizedError = (error: Error) =>
         error.message.includes('UNAUTHORIZED_ERROR');
 
@@ -64,8 +54,7 @@ function buildAuthProvider(client: ApolloClient<NormalizedCacheObject>): AuthPro
       const username = localStorage.getItem('username');
       const password = localStorage.getItem('password');
 
-      console.log('Checking auth...')
-      console.log('Auth found: ', username, password)
+      console.log('Auth found!');
 
       if (!username || !password) {
         return Promise.reject();
@@ -76,10 +65,11 @@ function buildAuthProvider(client: ApolloClient<NormalizedCacheObject>): AuthPro
     async getPermissions() {
       return Promise.resolve();
     },
+
     async getIdentity() {
       return Promise.resolve({
         id: '1',
-        fullName: 'Tomas Lopez Hidalgo'
+        fullName: 'Admin user'
       });
     }
   }

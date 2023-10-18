@@ -55,7 +55,7 @@ const PermissionsField = (_ :{ label: string }) => {
 
 export const ListRoles = () => {
   return (
-    <List queryOptions={{ optimisticResults: false }}>
+    <List>
       <Datagrid>
         <TextField label="ID" source="id" />
         <TextField label="Nombre" source="name" />

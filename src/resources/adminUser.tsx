@@ -11,7 +11,7 @@ import {
   } from 'react-admin';
 
   export const ListAdminUsers = () => (
-    <List queryOptions={{ optimisticResults: false }}>
+    <List>
       <Datagrid>
         <TextField label="ID" source="id" />
         <TextField label="Nombre" source="name" />

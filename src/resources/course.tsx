@@ -16,7 +16,7 @@ import {
 } from 'react-admin';
 
 export const ListCourses = () => (
-  <List queryOptions={{ optimisticResults: false }}>
+  <List>
     <Datagrid>
       <TextField label="ID" source="id" />
       <TextField label="Nombre de curso" source="name" />
