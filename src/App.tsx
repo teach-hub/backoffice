@@ -1,6 +1,10 @@
 import * as React from 'react';
-import { Admin, Resource } from 'react-admin';
+import { Admin, Resource, DataProvider } from 'react-admin';
+import { concat, ApolloLink, HttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
 import buildGraphQLProvider from 'ra-data-graphql-simple';
+import { setContext } from '@apollo/client/link/context';
+
+import buildAuthProvider from './providers/auth';
 
 import Dashboard from './Dashboard';
 
@@ -9,26 +13,61 @@ import { ListCourses, CreateCourse, EditCourse } from './resources/course';
 import { ListUsers, CreateUser, EditUser } from './resources/user';
 import { ListRoles, CreateRole, EditRole } from './resources/role';
 import { CreateAdminUser, EditAdminUser, ListAdminUsers } from './resources/adminUser';
-import {CreateUserRole, EditUserRole, ListUserRoles} from "./resources/userRole";
+import { CreateUserRole, EditUserRole, ListUserRoles } from './resources/userRole';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000/admin/graphql';
 
 const App = () => {
 
-    const [dataProvider, setDataProvider] = React.useState<any>(null);
+    const httpLink = new HttpLink({ uri: BACKEND_URL });
+
+    const authMiddleware = new ApolloLink((operation, forward) => {
+      operation.setContext(({ headers = {} }) => {
+        const username = localStorage.getItem('username');
+        const password = localStorage.getItem('password');
+
+        if (username && password) {
+          console.log('Injecting basic auth headers to request.')
+          return {
+            headers: {
+              ...headers,
+              username,
+              password,
+            }
+          }
+         } else
+           console.log('No auth found. Skipping sending headers.')
+
+         return { headers }
+      });
+
+      return forward(operation);
+    })
+
+    const client = new ApolloClient({
+      cache: new InMemoryCache(),
+      uri: BACKEND_URL,
+      link: concat(authMiddleware, httpLink)
+    })
+
+    const [dataProvider, setDataProvider] = React.useState<DataProvider | null>(null);
 
     React.useEffect(() => {
-        buildGraphQLProvider({ clientOptions: { uri: BACKEND_URL } })
-            .then(graphQlDataProvider => {
-              console.log('Setting data provider');
-              setDataProvider(() => graphQlDataProvider)
-            });
+        buildGraphQLProvider({ client }).then(graphQlDataProvider => {
+          console.log('Setting data provider');
+
+          setDataProvider(graphQlDataProvider)
+        });
     }, []);
 
-    if (!dataProvider) return (<h1> Loading </h1>);
+    if (!dataProvider) {
+      return <h1> Loading </h1>;
+    }
+
+    const authProvider = buildAuthProvider(client);
 
     return (
-      <Admin dataProvider={dataProvider} dashboard={Dashboard}>
+      <Admin authProvider={authProvider} dataProvider={dataProvider} dashboard={Dashboard}>
         <Resource options={{ label: "Usuarios" }} name="User" list={ListUsers} create={CreateUser} edit={EditUser} />
         <Resource options={{ label: "Usuarios (Admin)" }} name="AdminUser" list={ListAdminUsers} create={CreateAdminUser} edit={EditAdminUser} />
         <Resource options={{ label: "Materias" }} name="Subject" list={ListSubjects} create={CreateSubject} edit={EditSubject} />
