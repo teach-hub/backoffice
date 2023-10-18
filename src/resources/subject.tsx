@@ -10,7 +10,7 @@ import {
 } from 'react-admin';
 
 export const ListSubjects = () => (
-  <List>
+  <List queryOptions={{ optimisticResults: false }}>
     <Datagrid>
       <TextField label="ID" source="id" />
       <TextField label="Codigo" source="code" />

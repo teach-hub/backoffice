@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Admin, Resource, DataProvider } from 'react-admin';
-import { ApolloClient, InMemoryCacheConfig, InMemoryCache, gql } from '@apollo/client';
+import { concat, ApolloLink, HttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
 import buildGraphQLProvider from 'ra-data-graphql-simple';
+import { setContext } from '@apollo/client/link/context';
 
 import buildAuthProvider from './providers/auth';
 
@@ -18,25 +19,54 @@ const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000/
 
 const App = () => {
 
-    const [client, setClient] = React.useState(
-      new ApolloClient({ uri: BACKEND_URL, cache: new InMemoryCache() })
-    );
+    console.log('Loading app.')
+
+    const httpLink = new HttpLink({ uri: BACKEND_URL });
+
+    const authMiddleware = new ApolloLink((operation, forward) => {
+      operation.setContext(({ headers = {} }) => {
+        // add the authorization to the headers
+        const username = localStorage.getItem('username');
+        const password = localStorage.getItem('password');
+
+        if (username && password) {
+          console.log('Injecting basic auth headers to request.')
+          return {
+            headers: {
+              ...headers,
+              username,
+              password,
+            }
+          }
+         } else
+           console.log('No auth found. Skipping.')
+
+         return { headers }
+      });
+
+      return forward(operation);
+    })
+
+    const client = new ApolloClient({
+      cache: new InMemoryCache(),
+      link: concat(authMiddleware, httpLink)
+    })
+
     const [dataProvider, setDataProvider] = React.useState<DataProvider | null>(null);
 
     React.useEffect(() => {
-        buildGraphQLProvider({ client })
-        .then(graphQlDataProvider => {
+        buildGraphQLProvider({ client }).then(graphQlDataProvider => {
           console.log('Setting data provider');
 
-          setDataProvider(() => graphQlDataProvider)
+          setDataProvider(graphQlDataProvider)
         });
-    }, [client]);
+    }, []);
 
     if (!dataProvider) {
       return <h1> Loading </h1>;
     }
 
-    const authProvider = buildAuthProvider(setClient);
+    const authProvider = buildAuthProvider(client);
 
     return (
       <Admin authProvider={authProvider} dataProvider={dataProvider} dashboard={Dashboard}>

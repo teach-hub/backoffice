@@ -1,19 +1,8 @@
-import { NormalizedCacheObject, ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { NormalizedCacheObject, ApolloClient, gql } from '@apollo/client';
 
-import type { Dispatch } from 'react';
 import type { AuthProvider } from 'react-admin';
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || 'http://localhost:4000/admin/graphql';
-
-function buildAuthProvider(updateClientFn: Dispatch<ApolloClient<NormalizedCacheObject>>): AuthProvider {
-
-  const client = new ApolloClient({
-    uri: BACKEND_URL, cache: new InMemoryCache(),
-    headers: {
-      username: localStorage.getItem('username') || '',
-      password: localStorage.getItem('password') || '',
-    }
-  });
+function buildAuthProvider(client: ApolloClient<NormalizedCacheObject>): AuthProvider {
 
   return {
     async login({ username, password }) {
@@ -37,13 +26,14 @@ function buildAuthProvider(updateClientFn: Dispatch<ApolloClient<NormalizedCache
       console.log(response)
 
       if (!response.data.login.success) {
+        console.log('Login failed.')
         return Promise.reject();
       }
 
+      console.log('Login succeeded, setting creds.')
+
       localStorage.setItem('username', username);
       localStorage.setItem('password', password);
-
-      updateClientFn(client);
 
       return Promise.resolve();
     },
@@ -54,12 +44,28 @@ function buildAuthProvider(updateClientFn: Dispatch<ApolloClient<NormalizedCache
 
       return Promise.resolve();
     },
-    async checkError(_errors) {
+    async checkError(errors: unknown | unknown[]) {
+      console.log('Checking error...');
+
+      const isUnauthorizedError = (error: Error) =>
+        error.message.includes('UNAUTHORIZED_ERROR');
+
+      if (errors instanceof Error && isUnauthorizedError(errors)) {
+        return Promise.reject();
+      }
+
+      if (Array.isArray(errors) && errors.find(isUnauthorizedError)) {
+        return Promise.reject();
+      }
+
       return Promise.resolve();
     },
     async checkAuth() {
       const username = localStorage.getItem('username');
       const password = localStorage.getItem('password');
+
+      console.log('Checking auth...')
+      console.log('Auth found: ', username, password)
 
       if (!username || !password) {
         return Promise.reject();

@@ -16,7 +16,7 @@ import {
 
 export const ListUserRoles = () => {
   return (
-    <List>
+    <List queryOptions={{ optimisticResults: false }}>
       <Datagrid>
         <TextField label="ID" source="id" />
         <ReferenceField label="Usuario" source="userId" reference="User">
