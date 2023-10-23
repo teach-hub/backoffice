@@ -22,16 +22,13 @@ const App = () => {
 
     const authMiddleware = new ApolloLink((operation, forward) => {
       operation.setContext(({ headers = {} }) => {
-        const username = localStorage.getItem('username');
-        const password = localStorage.getItem('password');
-
-        if (username && password) {
+        const credentials = localStorage.getItem('credentials');
+        if (credentials) {
           console.log('Injecting basic auth headers to request.')
           return {
             headers: {
               ...headers,
-              username,
-              password,
+              Authorization: `Basic ${credentials}`,
             }
           }
          } else
