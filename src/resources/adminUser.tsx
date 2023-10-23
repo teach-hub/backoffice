@@ -1,3 +1,4 @@
+import React from 'react';
 import {
     Create,
     Datagrid,
@@ -6,8 +7,11 @@ import {
     TextField,
     TextInput,
     EditButton,
+    Confirm,
     Edit,
     email,
+    useRedirect,
+    useRecordContext,
   } from 'react-admin';
 
   export const ListAdminUsers = () => (
@@ -34,13 +38,43 @@ import {
     );
   }
 
-  export const CreateAdminUser = () => (
-    <Create title="Nuevo usuario">
-      <SimpleForm>
-        <AdminUserFields />
-      </SimpleForm>
-    </Create>
-  );
+  export const CreateAdminUser = () => {
+    const [password, setPassword] = React.useState<string | null>(null);
+    const redirect = useRedirect();
+
+    const confirmText = `Acabamos de crear un nuevo usuario admin con la contraseña: ${password}. Recorda que esta contraseña es unica y no se puede recuperar, por lo que te recomendamos que lo copies y guardes en un lugar seguro.`;
+
+    return (
+        <Create
+          mutationOptions={{
+            onSuccess(data: { password: string }) {
+              setPassword(data.password);
+            }
+          }}
+          title="Nuevo usuario"
+        >
+          <>
+            <Confirm
+              isOpen={!!password}
+              title='Nuevo usuario creado'
+              content={confirmText}
+              confirm="Aceptar"
+              cancel="Cancelar"
+              onClose={() =>
+                setPassword(null)
+              }
+              onConfirm={() => {
+                redirect('list', 'AdminUser')
+              }}
+            />
+
+            <SimpleForm>
+              <AdminUserFields />
+            </SimpleForm>
+          </>
+        </Create>
+    )
+  };
 
   export const EditAdminUser = () => {
     return (

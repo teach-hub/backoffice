@@ -24,8 +24,7 @@ function buildAuthProvider(client: ApolloClient<NormalizedCacheObject>): AuthPro
         return Promise.reject();
       }
 
-      localStorage.setItem('username', username);
-      localStorage.setItem('password', password);
+      localStorage.setItem('credentials', btoa(`${username}:${password}`));
 
       return Promise.resolve();
     },
@@ -51,12 +50,11 @@ function buildAuthProvider(client: ApolloClient<NormalizedCacheObject>): AuthPro
       return Promise.resolve();
     },
     async checkAuth() {
-      const username = localStorage.getItem('username');
-      const password = localStorage.getItem('password');
+      const creds = localStorage.getItem('credentials');
 
       console.log('Auth found!');
 
-      if (!username || !password) {
+      if (!creds) {
         return Promise.reject();
       }
 

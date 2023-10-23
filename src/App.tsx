@@ -1,10 +1,9 @@
 import * as React from 'react';
 import { Admin, Resource, DataProvider } from 'react-admin';
 import { concat, ApolloLink, HttpLink, ApolloClient, InMemoryCache } from '@apollo/client';
-import buildGraphQLProvider from 'ra-data-graphql-simple';
-import { setContext } from '@apollo/client/link/context';
 
 import buildAuthProvider from './providers/auth';
+import buildDataProvider from './providers/data';
 
 import Dashboard from './Dashboard';
 
@@ -23,16 +22,13 @@ const App = () => {
 
     const authMiddleware = new ApolloLink((operation, forward) => {
       operation.setContext(({ headers = {} }) => {
-        const username = localStorage.getItem('username');
-        const password = localStorage.getItem('password');
-
-        if (username && password) {
+        const credentials = localStorage.getItem('credentials');
+        if (credentials) {
           console.log('Injecting basic auth headers to request.')
           return {
             headers: {
               ...headers,
-              username,
-              password,
+              Authorization: `Basic ${credentials}`,
             }
           }
          } else
@@ -53,18 +49,18 @@ const App = () => {
     const [dataProvider, setDataProvider] = React.useState<DataProvider | null>(null);
 
     React.useEffect(() => {
-        buildGraphQLProvider({ client }).then(graphQlDataProvider => {
+        buildDataProvider({ client }).then(graphQlDataProvider => {
           console.log('Setting data provider');
 
           setDataProvider(graphQlDataProvider)
         });
     }, []);
 
+    const authProvider = buildAuthProvider(client);
+
     if (!dataProvider) {
       return <h1> Loading </h1>;
     }
-
-    const authProvider = buildAuthProvider(client);
 
     return (
       <Admin authProvider={authProvider} dataProvider={dataProvider} dashboard={Dashboard}>
