@@ -40,6 +40,7 @@ const ALL_PERMISSIONS = [
   { id: 'viewAllSubmissions', name: 'Ver entregas de cualquier corrector' },
   { id: 'assignReviewer', name: 'Asignar correctores' },
   { id: 'sendNotifications', name: 'Enviar notificaciones' },
+  { id: 'viewCourseCharts', name: 'Ver gráficos de estadisticas del curso' },
 ]
 
 const PermissionsField = (_ :{ label: string }) => {
