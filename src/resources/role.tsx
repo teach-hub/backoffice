@@ -57,7 +57,7 @@ const PermissionsField = (_ :{ label: string }) => {
 export const ListRoles = () => {
   return (
     <List>
-      <Datagrid>
+       <Datagrid bulkActionButtons={false}>  {/* Disable delete button through bulk actions */}
         <TextField label="ID" source="id" />
         <TextField label="Nombre" source="name" />
         <PermissionsField label="Permisos" />

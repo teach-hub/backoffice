@@ -17,7 +17,7 @@ import {
 export const ListUserRoles = () => {
   return (
     <List>
-      <Datagrid>
+      <Datagrid bulkActionButtons={false}>  {/* Disable delete button through bulk actions */}
         <TextField label="ID" source="id" />
         <ReferenceField label="Usuario" source="userId" reference="User">
           <FunctionField render={ (user: Record<any, any>) =>

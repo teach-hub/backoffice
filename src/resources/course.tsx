@@ -17,7 +17,7 @@ import {
 
 export const ListCourses = () => (
   <List>
-    <Datagrid>
+     <Datagrid bulkActionButtons={false}>  {/* Disable delete button through bulk actions */}
       <TextField label="ID" source="id" />
       <TextField label="Nombre de curso" source="name" />
       <TextField label="Año" source="year" />

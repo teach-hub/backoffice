@@ -14,7 +14,7 @@ import {
 
 export const ListUsers = () => (
   <List>
-    <Datagrid>
+     <Datagrid bulkActionButtons={false}>  {/* Disable delete button through bulk actions */}
       <TextField label="ID" source="id" />
       <TextField label="Github ID" source="githubId" />
       <TextField label="Nombre" source="name" />
