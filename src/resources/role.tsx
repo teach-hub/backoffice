@@ -87,7 +87,7 @@ export const CreateRole = () => {
             onChange={value => setParentRoleId(value)}
           />
         </ReferenceInput>
-        <CheckboxGroupInput source="permissions" choices={ALL_PERMISSIONS} />
+        <CheckboxGroupInput source="permissions" choices={ALL_PERMISSIONS} label={"Permisos"}/>
         <BooleanInput label="Rol de profesor" source="isTeacher"/>
       </SimpleForm>
     </Create>
@@ -110,7 +110,7 @@ export const EditRole = () => {
             onChange={value => setParentRoleId(value)}
           />
         </ReferenceInput>
-        <CheckboxGroupInput source="permissions" choices={ALL_PERMISSIONS}/>
+        <CheckboxGroupInput source="permissions" choices={ALL_PERMISSIONS} label={"Permisos"}/>
         <BooleanInput label="Activo" source="active"/>
         <BooleanInput label="Rol de profesor" source="isTeacher"/>
       </SimpleForm>
