@@ -13,6 +13,7 @@ import {
     useRedirect,
     useRecordContext,
   } from 'react-admin';
+import CustomEditToolbar from "../fields/CustomEditToolbar";
 
   export const ListAdminUsers = () => (
     <List>
@@ -79,7 +80,7 @@ import {
   export const EditAdminUser = () => {
     return (
       <Edit>
-        <SimpleForm>
+        <SimpleForm toolbar={<CustomEditToolbar />}>
           <TextInput disabled source="id" />
           <AdminUserFields />
         </SimpleForm>

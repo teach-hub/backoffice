@@ -11,6 +11,7 @@ import {
   Edit,
   email,
 } from 'react-admin';
+import CustomEditToolbar from "../fields/CustomEditToolbar";
 
 export const ListUsers = () => (
   <List>
@@ -52,7 +53,7 @@ export const CreateUser = () => (
 export const EditUser = () => {
   return (
     <Edit>
-      <SimpleForm>
+      <SimpleForm toolbar={<CustomEditToolbar />}>
         <TextInput disabled source="id" />
         <UserFields />
         <BooleanInput label="Activo" source="active" />

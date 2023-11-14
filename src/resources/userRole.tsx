@@ -13,6 +13,7 @@ import {
   TextInput,
   FunctionField, BooleanField
 } from 'react-admin';
+import CustomEditToolbar from "../fields/CustomEditToolbar";
 
 export const ListUserRoles = () => {
   return (
@@ -61,7 +62,7 @@ export const CreateUserRole = () => {
 
 export const EditUserRole = () => (
   <Edit>
-    <SimpleForm>
+    <SimpleForm toolbar={<CustomEditToolbar />}>
       <TextInput disabled source="id" />
       <ReferenceInput reference="User" source="userId">
         <SelectInput label="Usuario" optionText={userOptionRenderer} />

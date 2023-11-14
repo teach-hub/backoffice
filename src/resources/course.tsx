@@ -14,6 +14,7 @@ import {
   Edit,
   required,
 } from 'react-admin';
+import CustomEditToolbar from "../fields/CustomEditToolbar";
 
 export const ListCourses = () => (
   <List>
@@ -54,7 +55,7 @@ export const CreateCourse = () => (
 export const EditCourse = () => {
   return (
     <Edit>
-      <SimpleForm>
+      <SimpleForm toolbar={<CustomEditToolbar />}>
         <TextInput disabled source="id" />
         <TextInput label="Nombre" source="name" />
         <TextInput label="Organizacion (GitHub)" source="githubOrganization" />

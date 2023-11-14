@@ -8,6 +8,7 @@ import {
   TextInput,
   EditButton,
 } from 'react-admin';
+import CustomEditToolbar from "../fields/CustomEditToolbar";
 
 export const ListSubjects = () => (
   <List>
@@ -31,7 +32,7 @@ export const CreateSubject = () => (
 
 export const EditSubject = () => (
   <Edit>
-    <SimpleForm>
+    <SimpleForm toolbar={<CustomEditToolbar />}>
       <TextInput disabled source="id" />
       <TextInput required source="code" />
       <TextInput required source="name" />
