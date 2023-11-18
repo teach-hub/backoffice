@@ -28,11 +28,10 @@ const ALL_PERMISSIONS = [
   { id: 'editSubject', name: 'Editar materia' },
   { id: 'inviteUser', name: 'Invitar usuario' },
   { id: 'createAssignment', name: 'Crear trabajo práctico' },
-  { id: 'manageOwnGroups', name: 'Gestionar mis grupos (Alumno)' },
-  { id: 'submitAssignment', name: 'Realizar entrega' },
   { id: 'editAssignment', name: 'Editar trabajo práctico' },
   { id: 'setOrganization', name: 'Cambiar organizacion de Github' },
   { id: 'setDescription', name: 'Cambiar descripción de un curso' },
+  { id: 'viewCourseCharts', name: 'Ver gráficos de estadisticas del curso' },
   { id: 'createRepository', name: 'Crear repositorios' },
   { id: 'setReview', name: 'Realizar corrección' },
   { id: 'viewGroups', name: 'Ver grupos' },
@@ -41,7 +40,8 @@ const ALL_PERMISSIONS = [
   { id: 'viewAllSubmissions', name: 'Ver entregas de cualquier corrector' },
   { id: 'assignReviewer', name: 'Asignar correctores' },
   { id: 'sendNotifications', name: 'Enviar notificaciones' },
-  { id: 'viewCourseCharts', name: 'Ver gráficos de estadisticas del curso' },
+  { id: 'submitAssignment', name: 'Realizar entrega' },
+  { id: 'manageOwnGroups', name: 'Gestionar mis grupos (Alumno)' },
 ]
 
 const PermissionsField = (_ :{ label: string }) => {
