@@ -27,7 +27,7 @@ const ALL_PERMISSIONS = [
   { id: 'viewHome', name: 'Ver home' },
   { id: 'editSubject', name: 'Editar materia' },
   { id: 'inviteUser', name: 'Invitar usuario' },
-  { id: 'createAssignment', name: 'Crear Trabajo Practico' },
+  { id: 'createAssignment', name: 'Crear trabajo práctico' },
   { id: 'manageOwnGroups', name: 'Gestionar mis grupos (Alumno)' },
   { id: 'submitAssignment', name: 'Realizar entrega' },
   { id: 'editAssignment', name: 'Editar trabajo práctico' },
