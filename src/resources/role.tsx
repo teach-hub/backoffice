@@ -31,7 +31,7 @@ const ALL_PERMISSIONS = [
   { id: 'editAssignment', name: 'Editar trabajo práctico' },
   { id: 'setOrganization', name: 'Cambiar organizacion de Github' },
   { id: 'setDescription', name: 'Cambiar descripción de un curso' },
-  { id: 'viewCourseCharts', name: 'Ver gráficos de estadisticas del curso' },
+  { id: 'viewCourseCharts', name: 'Ver gráficos de estadísticas del curso' },
   { id: 'createRepository', name: 'Crear repositorios' },
   { id: 'setReview', name: 'Realizar corrección' },
   { id: 'viewGroups', name: 'Ver grupos' },
