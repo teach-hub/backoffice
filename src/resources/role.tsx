@@ -27,7 +27,7 @@ const ALL_PERMISSIONS = [
   { id: 'inviteUser', name: 'Invitar Usuarios' },
   { id: 'createAssignment', name: 'Crear Trabajo Práctico' },
   { id: 'editAssignment', name: 'Editar Trabajo Práctico' },
-  { id: 'setOrganization', name: 'Configurar Organizacion de GitHub' },
+  { id: 'setOrganization', name: 'Configurar Organización de GitHub' },
   { id: 'setDescription', name: 'Configurar Descripción' },
   { id: 'viewCourseCharts', name: 'Ver Estadísticas' },
   { id: 'createRepository', name: 'Crear Repositorios' },
