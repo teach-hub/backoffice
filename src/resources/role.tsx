@@ -24,24 +24,20 @@ import CustomEditToolbar from "../fields/CustomEditToolbar";
  */
 
 const ALL_PERMISSIONS = [
-  { id: 'viewHome', name: 'Ver home' },
-  { id: 'editSubject', name: 'Editar materia' },
-  { id: 'inviteUser', name: 'Invitar usuario' },
-  { id: 'createAssignment', name: 'Crear Trabajo Practico' },
-  { id: 'manageOwnGroups', name: 'Gestionar mis grupos' },
-  { id: 'submitAssignment', name: 'Realizar entrega' },
-  { id: 'editAssignment', name: 'Editar entrega' },
-  { id: 'setOrganization', name: 'Cambiar organizacion de Github' },
-  { id: 'setDescription', name: 'Cambiar descripción de un curso' },
-  { id: 'createRepository', name: 'Crear repositorios' },
-  { id: 'setReview', name: 'Realizar corrección' },
-  { id: 'viewGroups', name: 'Ver grupos' },
-  { id: 'manageGroups', name: 'Gestionar grupos' },
-  { id: 'viewSubmission', name: 'Ver entregas' },
-  { id: 'viewAllSubmissions', name: 'Ver entregas de cualquier corrector' },
-  { id: 'assignReviewer', name: 'Asignar correctores' },
-  { id: 'sendNotifications', name: 'Enviar notificaciones' },
-  { id: 'viewCourseCharts', name: 'Ver gráficos de estadisticas del curso' },
+  { id: 'inviteUser', name: 'Invitar Usuarios' },
+  { id: 'createAssignment', name: 'Crear Trabajo Práctico' },
+  { id: 'editAssignment', name: 'Editar Trabajo Práctico' },
+  { id: 'setOrganization', name: 'Configurar Organización de GitHub' },
+  { id: 'setDescription', name: 'Configurar Descripción' },
+  { id: 'viewCourseCharts', name: 'Ver Estadísticas' },
+  { id: 'createRepository', name: 'Crear Repositorios' },
+  { id: 'setReview', name: 'Realizar Correcciones' },
+  { id: 'manageGroups', name: 'Gestionar Grupos' },
+  { id: 'viewAllSubmissions', name: 'Ver todas las Entregas' },
+  { id: 'assignReviewer', name: 'Asignar Correctores' },
+  { id: 'sendNotifications', name: 'Enviar Notificaciones' },
+  { id: 'submitAssignment', name: 'Realizar Entrega' },
+  { id: 'manageOwnGroups', name: 'Gestionar propios Grupos' },
 ]
 
 const PermissionsField = (_ :{ label: string }) => {
