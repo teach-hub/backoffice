@@ -14,6 +14,7 @@ import {
     useRecordContext,
   } from 'react-admin';
 import CustomEditToolbar from "../fields/CustomEditToolbar";
+import Close from '@mui/icons-material/CloseOutlined';
 
   export const ListAdminUsers = () => (
     <List>
@@ -60,7 +61,8 @@ import CustomEditToolbar from "../fields/CustomEditToolbar";
               title='Nuevo usuario creado'
               content={confirmText}
               confirm="Aceptar"
-              cancel="Cancelar"
+              cancel="Cerrar"
+              CancelIcon={Close}
               onClose={() =>
                 setPassword(null)
               }
