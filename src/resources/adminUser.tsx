@@ -13,10 +13,11 @@ import {
     useRedirect,
     useRecordContext,
   } from 'react-admin';
+import CustomEditToolbar from "../fields/CustomEditToolbar";
 
   export const ListAdminUsers = () => (
     <List>
-      <Datagrid>
+       <Datagrid bulkActionButtons={false}>  {/* Disable delete button through bulk actions */}
         <TextField label="ID" source="id" />
         <TextField label="Nombre" source="name" />
         <TextField label="Apellido" source="lastName" />
@@ -79,7 +80,7 @@ import {
   export const EditAdminUser = () => {
     return (
       <Edit>
-        <SimpleForm>
+        <SimpleForm toolbar={<CustomEditToolbar />}>
           <TextInput disabled source="id" />
           <AdminUserFields />
         </SimpleForm>

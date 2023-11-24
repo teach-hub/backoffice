@@ -16,6 +16,7 @@ import {
   useRecordContext,
 } from 'react-admin';
 import {useState} from "react";
+import CustomEditToolbar from "../fields/CustomEditToolbar";
 
 /*
  * XXX: Lista de permisos disponibles, tiene que coincidir
@@ -57,7 +58,7 @@ const PermissionsField = (_ :{ label: string }) => {
 export const ListRoles = () => {
   return (
     <List>
-      <Datagrid>
+       <Datagrid bulkActionButtons={false}>  {/* Disable delete button through bulk actions */}
         <TextField label="ID" source="id" />
         <TextField label="Nombre" source="name" />
         <PermissionsField label="Permisos" />
@@ -99,7 +100,7 @@ export const EditRole = () => {
 
   return (
     <Edit>
-      <SimpleForm>
+      <SimpleForm toolbar={<CustomEditToolbar />}>
         <TextInput disabled source="id"/>
         <TextInput required label="Nombre" source="name"/>
         <ReferenceInput reference="Role" source="parentRoleId">

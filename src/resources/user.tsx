@@ -11,10 +11,11 @@ import {
   Edit,
   email,
 } from 'react-admin';
+import CustomEditToolbar from "../fields/CustomEditToolbar";
 
 export const ListUsers = () => (
   <List>
-    <Datagrid>
+     <Datagrid bulkActionButtons={false}>  {/* Disable delete button through bulk actions */}
       <TextField label="ID" source="id" />
       <TextField label="Github ID" source="githubId" />
       <TextField label="Nombre" source="name" />
@@ -52,7 +53,7 @@ export const CreateUser = () => (
 export const EditUser = () => {
   return (
     <Edit>
-      <SimpleForm>
+      <SimpleForm toolbar={<CustomEditToolbar />}>
         <TextInput disabled source="id" />
         <UserFields />
         <BooleanInput label="Activo" source="active" />

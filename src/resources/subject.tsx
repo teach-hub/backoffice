@@ -8,10 +8,11 @@ import {
   TextInput,
   EditButton,
 } from 'react-admin';
+import CustomEditToolbar from "../fields/CustomEditToolbar";
 
 export const ListSubjects = () => (
   <List>
-    <Datagrid>
+     <Datagrid bulkActionButtons={false}>  {/* Disable delete button through bulk actions */}
       <TextField label="ID" source="id" />
       <TextField label="Codigo" source="code" />
       <TextField label="Nombre" source="name" />
@@ -31,7 +32,7 @@ export const CreateSubject = () => (
 
 export const EditSubject = () => (
   <Edit>
-    <SimpleForm>
+    <SimpleForm toolbar={<CustomEditToolbar />}>
       <TextInput disabled source="id" />
       <TextInput required source="code" />
       <TextInput required source="name" />

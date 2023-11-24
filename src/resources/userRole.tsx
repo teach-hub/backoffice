@@ -13,11 +13,12 @@ import {
   TextInput,
   FunctionField, BooleanField
 } from 'react-admin';
+import CustomEditToolbar from "../fields/CustomEditToolbar";
 
 export const ListUserRoles = () => {
   return (
     <List>
-      <Datagrid>
+      <Datagrid bulkActionButtons={false}>  {/* Disable delete button through bulk actions */}
         <TextField label="ID" source="id" />
         <ReferenceField label="Usuario" source="userId" reference="User">
           <FunctionField render={ (user: Record<any, any>) =>
@@ -61,7 +62,7 @@ export const CreateUserRole = () => {
 
 export const EditUserRole = () => (
   <Edit>
-    <SimpleForm>
+    <SimpleForm toolbar={<CustomEditToolbar />}>
       <TextInput disabled source="id" />
       <ReferenceInput reference="User" source="userId">
         <SelectInput required label="Usuario" optionText={userOptionRenderer} />
