@@ -45,15 +45,15 @@ export const CreateUserRole = () => {
     <Create title="Nuevo rol de usuario">
       <SimpleForm>
         <ReferenceInput reference="User" source="userId">
-          <SelectInput label="Usuario" optionText={userOptionRenderer} />
+          <SelectInput required label="Usuario" optionText={userOptionRenderer} />
         </ReferenceInput>
         <ReferenceInput reference="Course" source="courseId">
-          <SelectInput label="Curso" optionText="name" />
+          <SelectInput required label="Curso" optionText="name" />
         </ReferenceInput>
         <ReferenceInput reference="Role" source="roleId">
-          <SelectInput label="Rol" optionText="name" />
+          <SelectInput required label="Rol" optionText="name" />
         </ReferenceInput>
-        <BooleanInput label="Activo" source="active" />
+        <BooleanInput label="Activo" source="active" defaultValue={true}/>
       </SimpleForm>
     </Create>
   )
@@ -64,13 +64,13 @@ export const EditUserRole = () => (
     <SimpleForm>
       <TextInput disabled source="id" />
       <ReferenceInput reference="User" source="userId">
-        <SelectInput label="Usuario" optionText={userOptionRenderer} />
+        <SelectInput required label="Usuario" optionText={userOptionRenderer} />
       </ReferenceInput>
       <ReferenceInput reference="Course" source="courseId">
-        <SelectInput label="Curso" optionText="name" />
+        <SelectInput required label="Curso" optionText="name" />
       </ReferenceInput>
       <ReferenceInput reference="Role" source="roleId">
-        <SelectInput label="Rol" optionText="name" />
+        <SelectInput required label="Rol" optionText="name" />
       </ReferenceInput>
       <BooleanInput label="Activo" source="active" />
     </SimpleForm>
